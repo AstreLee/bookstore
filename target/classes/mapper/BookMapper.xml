@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xin.bookstore.dao.BookMapper">
+    <insert id="insertOne">
+        INSERT INTO book (bookId, name, `desc`, num, price, publisher, categoryId, imgUrl)
+        VALUES (#{bookId}, #{name}, #{desc}, #{num}, #{price}, #{publisher}, #{categoryId}, #{imgUrl});
+    </insert>
+
+    <update id="updateNumByBooId">
+        UPDATE book
+        SET num = #{num}
+        WHERE bookId = #{bookId};
+    </update>
+
+    <update id="updateByBookId">
+        UPDATE book
+        SET `desc` = #{desc}, num = #{num}, price = #{price}
+        WHERE bookId = #{bookId};
+    </update>
+
+    <delete id="deleteByBookId">
+        DELETE
+        FROM book
+        WHERE bookId = #{bookId};
+    </delete>
+
+    <select id="selectPriceByBookId" resultType="java.lang.Double">
+        SELECT price
+        FROM book
+        WHERE bookId = #{bookId};
+    </select>
+
+    <select id="selectNumByBookId" resultType="java.lang.Integer">
+        SELECT num
+        FROM book
+        WHERE bookId = #{bookId};
+    </select>
+
+    <select id="selectBookList" resultType="com.xin.bookstore.entity.common.Book">
+        SELECT *
+        FROM book;
+    </select>
+
+    <select id="selectBookListByCategory" resultType="com.xin.bookstore.entity.common.Book">
+        SELECT *
+        FROM book
+        WHERE categoryId = #{categoryId};
+    </select>
+
+    <select id="selectAllPublisher" resultType="java.lang.String">
+        SELECT DISTINCT publisher
+        FROM book;
+    </select>
+
+    <select id="selectByThree" resultType="com.xin.bookstore.entity.common.Book">
+        SELECT *
+        FROM book
+        WHERE ${sql1}
+          AND ${sql2}
+          AND ${sql3};
+    </select>
+
+    <select id="selectNameByBookId" resultType="java.lang.String">
+        SELECT name
+        FROM book
+        WHERE bookId = #{bookId};
+    </select>
+
+    <select id="selectDescByBookId" resultType="java.lang.String">
+        SELECT `desc`
+        FROM book
+        WHERE bookId = #{bookId};
+    </select>
+    <select id="selectOneByBookId" resultType="com.xin.bookstore.entity.common.Book">
+        SELECT *
+        FROM book
+        WHERE bookId = #{bookId};
+    </select>
+</mapper>

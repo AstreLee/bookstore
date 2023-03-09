@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xin.bookstore.dao.RegularUserMapper">
+    <insert id="insertRoleByUserId">
+        INSERT INTO sys_user_role (roleId, userId)
+        VALUES ('1001', #{userId});
+    </insert>
+
+    <update id="updateStatusByUserId">
+        UPDATE sys_user_regular
+        SET status = #{status}
+        WHERE userId = #{userId};
+    </update>
+
+    <delete id="deleteByUserId">
+        DELETE
+        FROM sys_user_regular
+        WHERE userId = #{userId};
+    </delete>
+
+    <delete id="deleteRoleByUserId">
+        DELETE
+        FROM sys_user_role
+        WHERE userId = #{userId};
+    </delete>
+
+    <select id="selectByUsername" resultType="regularUser">
+        SELECT *
+        FROM sys_user_regular
+        WHERE username = #{username}
+    </select>
+
+    <select id="selectByUserId" resultType="com.xin.bookstore.entity.common.RegularUser">
+        SELECT *
+        FROM sys_user_regular
+        WHERE userId = #{userId};
+    </select>
+
+    <select id="selectByLimit" resultType="com.xin.bookstore.entity.common.RegularUser">
+        SELECT *
+        FROM sys_user_regular
+        LIMIT #{left}, #{right};
+    </select>
+</mapper>

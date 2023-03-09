@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xin.bookstore.dao.OrderItemMapper">
+
+    <insert id="insertByOrderIdAndBookId">
+        INSERT INTO order_item (orderId, bookId, num, price)
+        VALUES (#{orderId}, #{bookId}, #{num}, #{price});
+    </insert>
+
+    <select id="selectByOrderId" resultType="com.xin.bookstore.entity.common.OrderItem">
+        SELECT *
+        FROM order_item
+        WHERE orderId = #{orderId};
+    </select>
+</mapper>

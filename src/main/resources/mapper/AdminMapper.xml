@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xin.bookstore.dao.AdminUserMapper">
+    <insert id="insertRoleByRoleIdAndUserId">
+        INSERT INTO sys_user_role (roleId, userId) VALUES (#{roleId}, #{userId});
+    </insert>
+
+    <update id="updateStatusByUserId">
+        UPDATE sys_user_admin
+        SET status = #{status}
+        WHERE userId = #{userId};
+    </update>
+
+    <update id="updateByUserId">
+        UPDATE sys_user_admin
+        SET phone = #{phone},
+            email = #{email}
+        WHERE userId = #{userId};
+    </update>
+
+    <delete id="deleteByUserId">
+        DELETE
+        FROM sys_user_admin
+        WHERE userId = #{userId};
+    </delete>
+
+    <delete id="deleteRoleByUserId">
+        DELETE
+        FROM sys_user_role
+        WHERE userId = #{userId};
+    </delete>
+
+    <select id="selectByLimit" resultType="com.xin.bookstore.entity.common.AdminUser">
+        SELECT *
+        FROM sys_user_admin
+        LIMIT #{left}, #{right};
+    </select>
+
+    <select id="selectRoleByUserId" resultType="java.lang.String">
+        SELECT role.roleName
+        FROM sys_role role
+                 LEFT JOIN sys_user_role userRole ON role.roleId = userRole.roleId
+        WHERE userRole.userId = #{userId};
+    </select>
+
+    <select id="selectByUserId" resultType="com.xin.bookstore.entity.common.AdminUser">
+        SELECT *
+        FROM sys_user_admin
+        WHERE userId = #{userId};
+    </select>
+
+    <select id="selectRoleByRoleName" resultType="java.lang.Long">
+        SELECT roleId
+        FROM sys_role
+        WHERE roleName = #{roleName};
+    </select>
+</mapper>

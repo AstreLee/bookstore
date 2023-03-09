@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xin.bookstore.dao.UserOrderMapper">
+
+    <insert id="insertByUserIdAndOrderId">
+        INSERT INTO user_order (orderId, userId, num, price, state)
+        VALUES (#{orderId}, #{userId}, #{num}, #{price}, 1);
+    </insert>
+
+    <update id="updateStateByOrderId">
+        UPDATE user_order
+        SET state = #{state}
+        WHERE orderId = #{orderId};
+    </update>
+
+    <select id="selectOrderInfoByOrderId" resultType="com.xin.bookstore.entity.response.OrderInfoVO">
+        SELECT num, price
+        FROM user_order
+        WHERE orderId = #{orderId};
+    </select>
+
+    <select id="selectByUserId" resultType="com.xin.bookstore.entity.common.UserOrder">
+        SELECT *
+        FROM user_order
+        WHERE userId = #{userId};
+    </select>
+
+    <select id="selectByUserIdAndState" resultType="com.xin.bookstore.entity.common.UserOrder">
+        SELECT *
+        FROM user_order
+        WHERE userId = #{userId}
+          AND state = #{state};
+    </select>
+
+    <select id="selectByState" resultType="com.xin.bookstore.entity.common.UserOrder">
+        SELECT *
+        FROM user_order
+        WHERE state = #{state};
+    </select>
+</mapper>

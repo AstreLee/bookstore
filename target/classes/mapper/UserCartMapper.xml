@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xin.bookstore.dao.UserCartMapper">
+    <update id="updateNumAndPriceByUserId">
+        UPDATE user_cart
+        SET num   = num + #{num},
+            price = price + #{price}
+        WHERE userId = #{userId};
+    </update>
+
+    <update id="clearCart">
+        UPDATE user_cart
+        SET num = 0,
+            price = 0
+        WHERE userId = #{userId};
+    </update>
+
+    <select id="selectCartIdByUserId" resultType="java.lang.Long">
+        SELECT cartId
+        FROM user_cart
+        WHERE userId = #{userId};
+    </select>
+
+    <select id="selectPriceByUserId" resultType="java.lang.Double">
+        SELECT price
+        FROM user_cart
+        WHERE userId = #{userId};
+    </select>
+
+    <select id="selectNumAndPriceByUserId" resultType="com.xin.bookstore.entity.response.CartInfoVO">
+        SELECT num, price
+        FROM user_cart
+        WHERE userId = #{userId};
+    </select>
+</mapper>

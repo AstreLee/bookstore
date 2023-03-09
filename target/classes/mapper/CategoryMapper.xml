@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xin.bookstore.dao.CategoryMapper">
+
+    <insert id="insert">
+        INSERT INTO category (categoryId, name, `desc`)
+        VALUES (#{categoryId}, #{name}, #{desc});
+    </insert>
+
+    <update id="updateByCategoryId">
+        UPDATE category
+        SET `desc` = #{desc}
+        WHERE categoryId = #{categoryId};
+    </update>
+
+    <delete id="deleteByCategoryId">
+        DELETE
+        FROM category
+        WHERE categoryId = #{categoryId};
+    </delete>
+
+    <select id="getIdByCategoryName" resultType="com.xin.bookstore.entity.common.Category">
+        SELECT categoryId, name, `desc`
+        FROM category
+        WHERE name = #{name};
+    </select>
+
+    <select id="selectAllCategory" resultType="com.xin.bookstore.entity.common.Category">
+        SELECT categoryId, name, `desc`
+        FROM category;
+    </select>
+
+    <select id="selectByLimit" resultType="com.xin.bookstore.entity.common.Category">
+        SELECT categoryId, name, `desc`
+        FROM category
+        LIMIT #{left}, #{right};
+    </select>
+
+    <select id="selectByCategoryId" resultType="com.xin.bookstore.entity.common.Category">
+        SELECT categoryId, name, `desc`
+        FROM category
+        WHERE categoryId = #{categoryId};
+    </select>
+</mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xin.bookstore.dao.CartItemMapper">
+    <insert id="insertByCartIdAndBookId">
+        INSERT INTO cart_item (cartId, bookId, num, price)
+        VALUES (#{cartId}, #{bookId}, 1, #{price});
+    </insert>
+
+    <update id="updateByCartIdAndBookId">
+        UPDATE cart_item
+        SET num   = #{num},
+            price = #{price}
+        WHERE bookId = #{bookId};
+    </update>
+
+    <delete id="deleteByCartIdAndBookId">
+        DELETE
+        FROM cart_item
+        WHERE cartId = #{cartId}
+          AND bookId = #{bookId};
+    </delete>
+
+    <delete id="deleteBatchCartIdAndBookId">
+        DELETE
+        FROM cart_item
+        WHERE cartId = #{cartId}
+          AND bookId IN ${ids};
+    </delete>
+
+    <delete id="deleteAll">
+        DELETE
+        FROM cart_item
+        WHERE cartId = #{cartId}
+    </delete>
+
+    <select id="selectByCartIdAndBookId" resultType="com.xin.bookstore.entity.common.CartItem">
+        SELECT *
+        FROM cart_item
+        WHERE cartId = #{cartId}
+          AND bookId = #{bookId};
+    </select>
+
+    <select id="selectNumByCartIdAndBookId" resultType="java.lang.Integer">
+        SELECT num
+        FROM cart_item
+        WHERE cartId = #{cartId}
+          AND bookId = #{bookId};
+    </select>
+
+    <select id="selectAll" resultType="com.xin.bookstore.entity.common.CartItem">
+        SELECT *
+        FROM cart_item
+        WHERE cartId = #{cartId};
+    </select>
+</mapper>
